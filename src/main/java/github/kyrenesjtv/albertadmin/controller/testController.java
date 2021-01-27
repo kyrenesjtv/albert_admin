@@ -19,12 +19,9 @@ import java.util.Map;
 public class testController {
 
     @RequestMapping(value = "/test")
-    @AnonymousAccess
     public Map<String,Object> test() throws Exception{
         Map<String, Object> map = new HashMap<>();
         map.put("name","albert");
-        List<Object> objects = new ArrayList<>();
-        Object o = objects.get(2);
         return map;
     }
 

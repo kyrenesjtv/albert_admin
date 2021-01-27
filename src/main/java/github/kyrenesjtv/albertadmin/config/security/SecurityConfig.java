@@ -4,13 +4,17 @@ import github.kyrenesjtv.albertadmin.config.annotation.AnonymousAccess;
 import github.kyrenesjtv.albertadmin.util.enums.RequestMethodEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.filter.CorsFilter;
@@ -18,7 +22,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -39,6 +42,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint authenticationErrorHandler;
     @Autowired
     private JwtAccessDeniedHandler jwtAccessDeniedHandler;
+
+
+    private final JwtTokenUtil jwtTokenUtil;
+
+    public SecurityConfig(JwtTokenUtil jwtTokenUtil) {
+        this.jwtTokenUtil = jwtTokenUtil;
+    }
+
+    @Bean
+    GrantedAuthorityDefaults grantedAuthorityDefaults() {
+        // 去除 ROLE_ 前缀
+        return new GrantedAuthorityDefaults("");
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        // 密码加密方式 ，这边可以更改
+        return new MessageDigestPasswordEncoder("MD5");
+    }
+
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -100,8 +123,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 所有类型的接口都放行
                 .antMatchers(anonymousUrls.get(RequestMethodEnum.ALL.getType()).toArray(new String[0])).permitAll()
                 // 所有请求都需要认证
-                .anyRequest().authenticated();
-//                .and().apply(securityConfigurerAdapter());
+                .anyRequest().authenticated()
+                //拦截器
+                .and().apply(securityConfigurerAdapter());
+    }
+
+    private TokenConfigurer securityConfigurerAdapter() {
+        return new TokenConfigurer(jwtTokenUtil);
     }
 
     private Map<String, Set<String>> getAnonymousUrl(Map<RequestMappingInfo, HandlerMethod> handlerMethodMap) {
