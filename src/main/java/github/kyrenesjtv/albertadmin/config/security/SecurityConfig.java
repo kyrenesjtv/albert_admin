@@ -31,6 +31,7 @@ import java.util.*;
  */
 @Configuration
 @EnableWebSecurity
+//生效权限注解
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

@@ -39,7 +39,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("");
         } else {
             List<GrantedAuthority> authorities = new ArrayList<>();
-                authorities.add(new SimpleGrantedAuthority("超级管理员"));
+//                authorities.add(new SimpleGrantedAuthority("admin"));
+            authorities.add(new SimpleGrantedAuthority("/test/test"));
             return new User(userPO.getLoginName(), userPO.getPassword(), authorities);
         }
 

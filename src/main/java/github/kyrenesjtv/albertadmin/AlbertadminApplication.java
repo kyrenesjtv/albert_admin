@@ -1,10 +1,12 @@
 package github.kyrenesjtv.albertadmin;
 
 import github.kyrenesjtv.albertadmin.config.security.JwtTokenUtil;
+import github.kyrenesjtv.albertadmin.config.springcontext.SpringContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -24,6 +26,11 @@ public class AlbertadminApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AlbertadminApplication.class, args);
+    }
+
+    @Bean
+    public SpringContextHolder springContextHolder() {
+        return new SpringContextHolder();
     }
 
     @Bean
