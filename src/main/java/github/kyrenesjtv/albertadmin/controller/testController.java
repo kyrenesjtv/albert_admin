@@ -1,11 +1,7 @@
 package github.kyrenesjtv.albertadmin.controller;
 
-import github.kyrenesjtv.albertadmin.config.annotation.AnonymousAccess;
-import github.kyrenesjtv.albertadmin.config.springcontext.SpringContextHolder;
+import github.kyrenesjtv.albertadmin.config.security.SecurityUtil;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

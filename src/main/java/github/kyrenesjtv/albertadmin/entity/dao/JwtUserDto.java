@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
  */
 public class JwtUserDto implements UserDetails {
 
-    private UserPO userPO;
+    private UserPO user;
 
     private  List<GrantedAuthority> authorities;
 
 
     public JwtUserDto(UserPO userPO, List<GrantedAuthority> authorities) {
-        this.userPO = userPO;
+        this.user = userPO;
         this.authorities = authorities;
     }
 
@@ -32,12 +32,12 @@ public class JwtUserDto implements UserDetails {
 
     @Override
     public String getPassword() {
-        return userPO.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userPO.getLoginName();
+        return user.getLoginName();
     }
 
     @Override

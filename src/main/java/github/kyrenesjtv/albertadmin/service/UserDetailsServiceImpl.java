@@ -41,7 +41,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             List<GrantedAuthority> authorities = new ArrayList<>();
 //                authorities.add(new SimpleGrantedAuthority("admin"));
             authorities.add(new SimpleGrantedAuthority("/test/test"));
-            return new User(userPO.getLoginName(), userPO.getPassword(), authorities);
+            JwtUserDto jwtUserDto = new JwtUserDto(userPO,authorities);
+//            return new User(userPO.getLoginName(), userPO.getPassword(), authorities);
+            return jwtUserDto;
         }
 
     }
