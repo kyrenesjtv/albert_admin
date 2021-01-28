@@ -6,16 +6,17 @@ package github.kyrenesjtv.albertadmin.entity.po;
  * @CreateDate: 2021/1/22 17:13
  */
 public class UserPO {
-    private Integer id;
+    private Long id;
     private String loginName;
     private String password;
+//    private int isAdmin;
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -34,4 +35,12 @@ public class UserPO {
     public void setPassword(String password) {
         this.password = password;
     }
+
+//    public int getIsAdmin() {
+//        return isAdmin;
+//    }
+//
+//    public void setIsAdmin(int isAdmin) {
+//        this.isAdmin = isAdmin;
+//    }
 }

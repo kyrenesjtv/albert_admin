@@ -1,7 +1,7 @@
 package github.kyrenesjtv.albertadmin.service;
 
 import github.kyrenesjtv.albertadmin.config.exception.EntityNotFoundException;
-import github.kyrenesjtv.albertadmin.entity.dao.JwtUserDto;
+import github.kyrenesjtv.albertadmin.entity.dto.JwtUserDto;
 import github.kyrenesjtv.albertadmin.entity.po.UserPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,6 +25,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -38,12 +40,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (userPO == null) {
             throw new UsernameNotFoundException("");
         } else {
-            List<GrantedAuthority> authorities = new ArrayList<>();
-//                authorities.add(new SimpleGrantedAuthority("admin"));
-            authorities.add(new SimpleGrantedAuthority("/test/test"));
-            JwtUserDto jwtUserDto = new JwtUserDto(userPO,authorities);
-//            return new User(userPO.getLoginName(), userPO.getPassword(), authorities);
-            return jwtUserDto;
+            List<GrantedAuthority> grantedAuthorities = roleService.getGrantedAuthorities(userPO);
+//            return new User(userPO.getLoginName(), userPO.getPassword(), grantedAuthorities);
+            return new JwtUserDto(userPO,grantedAuthorities);
         }
 
     }

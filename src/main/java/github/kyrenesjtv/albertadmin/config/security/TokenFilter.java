@@ -1,6 +1,8 @@
 package github.kyrenesjtv.albertadmin.config.security;
 
 import cn.hutool.core.util.StrUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -20,7 +22,7 @@ import java.io.IOException;
  * @CreateDate: 2021/1/27 10:05
  */
 public class TokenFilter extends GenericFilterBean {
-
+    private final Logger LOGGER = LoggerFactory.getLogger(TokenFilter.class);
     private final JwtTokenUtil jwtTokenUtil;
 
     public TokenFilter(JwtTokenUtil jwtTokenUtil) {

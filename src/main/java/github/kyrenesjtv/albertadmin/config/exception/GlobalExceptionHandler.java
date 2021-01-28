@@ -1,6 +1,9 @@
 package github.kyrenesjtv.albertadmin.config.exception;
 
 import github.kyrenesjtv.albertadmin.config.exception.entity.ApiError;
+import github.kyrenesjtv.albertadmin.util.ThrowableUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,13 +24,15 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     /**
      * 处理所有不可知的异常
      */
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<ApiError> handleException(Throwable e){
         // 打印堆栈信息
-//        log.error(ThrowableUtil.getStackTrace(e));
+        LOGGER.error(ThrowableUtil.getStackTrace(e));
         return buildResponseEntity(ApiError.error(e.getMessage()));
     }
 
@@ -37,7 +42,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BadRequestException.class)
     public ResponseEntity<ApiError> badRequestException(BadRequestException e) {
         // 打印堆栈信息
-//        log.error(ThrowableUtil.getStackTrace(e));
+        LOGGER.error(ThrowableUtil.getStackTrace(e));
         return buildResponseEntity(ApiError.error(e.getStatus(),e.getMessage()));
     }
 
@@ -48,7 +53,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> badCredentialsException(BadCredentialsException e){
         // 打印堆栈信息
         String message = "坏的凭证".equals(e.getMessage()) ? "用户名或密码不正确" : e.getMessage();
-//        log.error(message);
+        LOGGER.error(message);
         return buildResponseEntity(ApiError.error(message));
     }
 
@@ -58,7 +63,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = EntityExistException.class)
     public ResponseEntity<ApiError> entityExistException(EntityExistException e) {
         // 打印堆栈信息
-//        log.error(ThrowableUtil.getStackTrace(e));
+        LOGGER.error(ThrowableUtil.getStackTrace(e));
         return buildResponseEntity(ApiError.error(e.getMessage()));
     }
 
@@ -68,7 +73,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = EntityNotFoundException.class)
     public ResponseEntity<ApiError> entityNotFoundException(EntityNotFoundException e) {
         // 打印堆栈信息
-//        log.error(ThrowableUtil.getStackTrace(e));
+        LOGGER.error(ThrowableUtil.getStackTrace(e));
         return buildResponseEntity(ApiError.error(NOT_FOUND.value(),e.getMessage()));
     }
 
@@ -78,7 +83,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
         // 打印堆栈信息
-//        log.error(ThrowableUtil.getStackTrace(e));
+        LOGGER.error(ThrowableUtil.getStackTrace(e));
         String[] str = Objects.requireNonNull(e.getBindingResult().getAllErrors().get(0).getCodes())[1].split("\\.");
         String message = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
         String msg = "不能为空";

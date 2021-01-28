@@ -1,4 +1,4 @@
-package github.kyrenesjtv.albertadmin.entity.dao;
+package github.kyrenesjtv.albertadmin.entity.dto;
 
 import github.kyrenesjtv.albertadmin.entity.po.UserPO;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
  */
 public class JwtUserDto implements UserDetails {
 
-    private UserPO user;
+    private  UserPO user;
+
+    private  List<Long> dataScopes;
 
     private  List<GrantedAuthority> authorities;
 
@@ -57,6 +59,6 @@ public class JwtUserDto implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

@@ -1,6 +1,6 @@
 package github.kyrenesjtv.albertadmin.config.security;
 
-import github.kyrenesjtv.albertadmin.entity.po.UserPO;
+import github.kyrenesjtv.albertadmin.entity.dto.JwtUserDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;
 import io.jsonwebtoken.Jwts;
@@ -81,10 +81,10 @@ public class JwtTokenUtil implements Serializable {
         return false;
     }
 
-    public String generateToken(UserPO userDetails) {
+    public String generateToken(JwtUserDto userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("user",userDetails);
-        return doGenerateToken(claims, userDetails.getLoginName());
+        return doGenerateToken(claims, userDetails.getUsername());
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {
