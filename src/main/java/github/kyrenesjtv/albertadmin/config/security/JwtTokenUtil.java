@@ -42,6 +42,14 @@ public class JwtTokenUtil implements Serializable {
     @Value("${jwt.header}")
     private String tokenHeader;
 
+    @Value("${jwt.start.with}")
+    private String tokenStartWith;
+
+    public String getTokenStartWith() {
+        return this.tokenStartWith + " ";
+    }
+
+
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);

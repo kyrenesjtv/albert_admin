@@ -52,7 +52,7 @@ public class AuthorizationController {
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         JwtUserDto jwtUserDto = (JwtUserDto) authenticate.getPrincipal();
                 String s = jwtTokenUtil.generateToken(jwtUserDto);
-        result.put("token",s);
+        result.put("token",jwtTokenUtil.getTokenStartWith()+ s);
         result.put("user",jwtUserDto);
         return result;
     }
