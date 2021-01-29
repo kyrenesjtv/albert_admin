@@ -1,7 +1,6 @@
 package github.kyrenesjtv.albertadmin.entity.dto;
 
 import github.kyrenesjtv.albertadmin.entity.po.GlobalUser;
-import github.kyrenesjtv.albertadmin.entity.po.UserPO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -30,6 +29,10 @@ public class JwtUserDto implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+    public void removePassword(){
+        this.user.setPassword("******");
     }
 
     @Override

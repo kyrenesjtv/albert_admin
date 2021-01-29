@@ -1,5 +1,7 @@
 package github.kyrenesjtv.albertadmin.controller.anonymousController;
 
+import cn.hutool.core.bean.copier.BeanCopier;
+import cn.hutool.core.bean.copier.CopyOptions;
 import github.kyrenesjtv.albertadmin.config.annotation.AnonymousAccess;
 import github.kyrenesjtv.albertadmin.config.security.JwtTokenUtil;
 import github.kyrenesjtv.albertadmin.entity.dto.JwtUserDto;
@@ -50,7 +52,8 @@ public class AuthorizationController {
             Authentication authenticate = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         JwtUserDto jwtUserDto = (JwtUserDto) authenticate.getPrincipal();
-                String s = jwtTokenUtil.generateToken(jwtUserDto);
+        jwtUserDto.removePassword();
+        String s = jwtTokenUtil.generateToken(jwtUserDto);
         result.put("token",jwtTokenUtil.getTokenStartWith()+ s);
         result.put("user",jwtUserDto);
         return result;
