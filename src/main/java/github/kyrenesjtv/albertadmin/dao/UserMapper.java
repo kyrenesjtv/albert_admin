@@ -1,5 +1,6 @@
 package github.kyrenesjtv.albertadmin.dao;
 
+import github.kyrenesjtv.albertadmin.entity.po.GlobalUser;
 import github.kyrenesjtv.albertadmin.entity.po.UserPO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -13,5 +14,5 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 
 
-    UserPO getUserByName(@Param("name") String username);
+    GlobalUser getUserByName(@Param("name") String username);
 }

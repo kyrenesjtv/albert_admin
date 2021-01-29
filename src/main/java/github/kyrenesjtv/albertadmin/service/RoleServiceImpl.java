@@ -1,7 +1,7 @@
 package github.kyrenesjtv.albertadmin.service;
 
 import github.kyrenesjtv.albertadmin.dao.RoleMapper;
-import github.kyrenesjtv.albertadmin.entity.po.UserPO;
+import github.kyrenesjtv.albertadmin.entity.po.GlobalUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,16 +25,16 @@ public class RoleServiceImpl implements RoleService{
     private RoleMapper roleMapper;
 
     @Override
-    public List<GrantedAuthority> getGrantedAuthorities(UserPO userPO) {
-//        if(userPO.getIsAdmin() == 1 ){
+    public List<GrantedAuthority> getGrantedAuthorities(GlobalUser userPO) {
+        if(userPO.getIsAdmin() != null && userPO.getIsAdmin().equals(1) ){
             //超级管理员，默认所有权限
             List<GrantedAuthority> result = new ArrayList<>();
             result.add(new SimpleGrantedAuthority("admin"));
             return result;
-//        }else{
-//            //去获取权限数据
-//            List<String> pers = roleMapper.getPermissionByUserId(userPO.getId());
-//            return pers.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-//        }
+        }else{
+            //去获取权限数据
+            List<String> pers = roleMapper.getPermissionByUserId(userPO.getId());
+            return pers.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        }
     }
 }

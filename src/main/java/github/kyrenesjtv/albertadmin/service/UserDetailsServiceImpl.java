@@ -2,7 +2,7 @@ package github.kyrenesjtv.albertadmin.service;
 
 import github.kyrenesjtv.albertadmin.config.exception.EntityNotFoundException;
 import github.kyrenesjtv.albertadmin.entity.dto.JwtUserDto;
-import github.kyrenesjtv.albertadmin.entity.po.UserPO;
+import github.kyrenesjtv.albertadmin.entity.po.GlobalUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserPO userPO = null;
+        GlobalUser userPO = null;
         try {
             userPO = userService.getUserByName(username);
         } catch (EntityNotFoundException e) {

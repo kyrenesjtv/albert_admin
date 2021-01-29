@@ -3,7 +3,11 @@
 <mapper namespace="github.kyrenesjtv.albertadmin.dao.RoleMapper">
 
     <select id="getPermissionByUserId" resultType="java.lang.String">
-        select '/test/test'
+      select distinct gf.address
+      from global_function gf
+      left join global_role_function grf on grf.functionId = gf.id
+      left join global_roleuser gru on gru.roleId = grf.roleId
+      where gru.userId = #{userId}
     </select>
 
 </mapper>

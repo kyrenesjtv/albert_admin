@@ -1,5 +1,6 @@
 package github.kyrenesjtv.albertadmin.service;
 
+import github.kyrenesjtv.albertadmin.entity.po.GlobalUser;
 import github.kyrenesjtv.albertadmin.entity.po.UserPO;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -17,5 +18,5 @@ public interface RoleService {
      * @param userPO
      * @return
      */
-    List<GrantedAuthority> getGrantedAuthorities(UserPO userPO);
+    List<GrantedAuthority> getGrantedAuthorities(GlobalUser userPO);
 }

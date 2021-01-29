@@ -2,6 +2,7 @@ package github.kyrenesjtv.albertadmin.service;
 
 
 import github.kyrenesjtv.albertadmin.dao.UserMapper;
+import github.kyrenesjtv.albertadmin.entity.po.GlobalUser;
 import github.kyrenesjtv.albertadmin.entity.po.UserPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class UserServiceImpl implements UserService{
     private UserMapper userMapper;
 
     @Override
-    public UserPO getUserByName(String username) {
+    public GlobalUser getUserByName(String username) {
         return userMapper.getUserByName(username);
     }
 }

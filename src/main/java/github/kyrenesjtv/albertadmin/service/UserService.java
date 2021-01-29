@@ -1,5 +1,6 @@
 package github.kyrenesjtv.albertadmin.service;
 
+import github.kyrenesjtv.albertadmin.entity.po.GlobalUser;
 import github.kyrenesjtv.albertadmin.entity.po.UserPO;
 
 /**
@@ -9,5 +10,5 @@ import github.kyrenesjtv.albertadmin.entity.po.UserPO;
  */
 public interface UserService {
 
-    UserPO getUserByName(String username);
+    GlobalUser getUserByName(String username);
 }

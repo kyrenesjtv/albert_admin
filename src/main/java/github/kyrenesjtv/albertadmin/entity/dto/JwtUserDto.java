@@ -1,5 +1,6 @@
 package github.kyrenesjtv.albertadmin.entity.dto;
 
+import github.kyrenesjtv.albertadmin.entity.po.GlobalUser;
 import github.kyrenesjtv.albertadmin.entity.po.UserPO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,14 +16,13 @@ import java.util.stream.Collectors;
  */
 public class JwtUserDto implements UserDetails {
 
-    private  UserPO user;
+    private GlobalUser user;
 
-    private  List<Long> dataScopes;
 
     private  List<GrantedAuthority> authorities;
 
 
-    public JwtUserDto(UserPO userPO, List<GrantedAuthority> authorities) {
+    public JwtUserDto(GlobalUser userPO, List<GrantedAuthority> authorities) {
         this.user = userPO;
         this.authorities = authorities;
     }
@@ -42,23 +42,28 @@ public class JwtUserDto implements UserDetails {
         return user.getLoginName();
     }
 
+    //不过期
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    //不锁定
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    //凭证没有过去
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    //是激活
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.getState()==null?false:user.getState()==1?true:false;
+//        return true;
     }
 }

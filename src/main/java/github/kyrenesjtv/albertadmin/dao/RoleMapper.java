@@ -1,5 +1,6 @@
 package github.kyrenesjtv.albertadmin.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,5 +13,5 @@ import java.util.List;
 @Repository
 public interface RoleMapper {
 
-    List<String> getPermissionByUserId(Long id);
+    List<String> getPermissionByUserId(@Param("userId") String id);
 }
