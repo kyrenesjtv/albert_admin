@@ -56,6 +56,8 @@ public class AuthorizationController {
         String s = jwtTokenUtil.generateToken(jwtUserDto);
         result.put("token",jwtTokenUtil.getTokenStartWith()+ s);
         result.put("user",jwtUserDto);
+        //保存用户信息
+        
         return result;
     }
 

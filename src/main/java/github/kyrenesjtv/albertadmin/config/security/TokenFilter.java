@@ -36,6 +36,9 @@ public class TokenFilter extends GenericFilterBean {
         String token = jwtTokenUtil.getToken(httpServletRequest);
         // 对于 Token 为空的不需要去查 Redis
         if (StrUtil.isNotBlank(token)) {
+            //通过token去redis里获取用户
+
+
             //判断有没有过期
             Boolean aBoolean = jwtTokenUtil.validateToken(token);
             if(aBoolean){
