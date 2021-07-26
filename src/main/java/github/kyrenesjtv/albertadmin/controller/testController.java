@@ -1,6 +1,8 @@
 package github.kyrenesjtv.albertadmin.controller;
 
 import github.kyrenesjtv.albertadmin.config.annotation.AnonymousAccess;
+import github.kyrenesjtv.albertadmin.service.ITestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,14 +20,14 @@ import java.util.Map;
 @RestController
 public class testController {
 
+    @Autowired
+    private ITestService testService;
+
     @RequestMapping(value = "/test")
     @AnonymousAccess
     public Map<String,Object> test() throws Exception{
-        Map<String, Object> map = new HashMap<>();
-        map.put("name","albert");
-        List<Object> objects = new ArrayList<>();
-        Object o = objects.get(2);
-        return map;
+        Map<String, Object> userById = testService.getUserById();
+        return userById;
     }
 
 }

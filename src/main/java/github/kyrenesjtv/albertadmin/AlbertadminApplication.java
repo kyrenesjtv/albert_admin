@@ -3,6 +3,7 @@ package github.kyrenesjtv.albertadmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -11,6 +12,7 @@ import org.springframework.web.filter.CorsFilter;
 
 @EnableAsync
 @SpringBootApplication
+@ServletComponentScan
 public class AlbertadminApplication {
 
     @Autowired
