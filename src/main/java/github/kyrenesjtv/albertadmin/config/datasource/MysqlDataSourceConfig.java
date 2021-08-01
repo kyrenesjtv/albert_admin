@@ -31,13 +31,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
-<<<<<<< HEAD
- * 主数据源
-=======
  * @ProjectName: dingDang - 副本
  * @Author: AlbertW
  * @CreateDate: 2019/3/4 16:47
->>>>>>> 5be5ca1d72cb10dffdc86c7e455cadd7fd5729e2
  */
 @Configuration
 @MapperScan(basePackages = MysqlDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "mysqlSqlSessionFactory")
@@ -45,15 +41,9 @@ import java.util.Map;
 @EnableTransactionManagement
 public class MysqlDataSourceConfig implements EnvironmentAware {
     // mysqldao扫描路径
-<<<<<<< HEAD
-    static final String PACKAGE = "github.kyrenesjtv.albertadmin.dao.**";
-    // mybatis mapper扫描路径
-    static final String MAPPER_LOCATION = "github/kyrenesjtv/albertadmin/dao/**.xml";
-=======
     static final String PACKAGE = "github.kyrenesjtv.albertadmin.dao";
     // mybatis mapper扫描路径
     static final String MAPPER_LOCATION = "github.kyrenesjtv.albertadmin.dao.*.xml";
->>>>>>> 5be5ca1d72cb10dffdc86c7e455cadd7fd5729e2
     //2.0之后用这种方法，直接getProperty
     private Environment environment;
 
